@@ -91,6 +91,9 @@ Remember to set nltk_wordnet path in `./model/src/utils/evaluation_script/spice_
 python src/parser.py --predict --outdir [results directory] --test test.conll [--extrn extrn.vectors] --model [trained model file] --params [param file generate during training]
 ```
 
+#### Pre-trained Model
+We also released our pretrained model in the following website:
+https://gitlab.com/Yusics/SG_weights 
 
 
 
