@@ -7,5 +7,6 @@ This Repo is made to visualize output of SGP model.
 ## How to use
 ```
 # Input sentences to input_sentences.txt
-python ./model/src/parser.py --predict
+cd model
+python ./src/parser.py --predict
 ```
