@@ -1,0 +1,42 @@
+1	two	-1	_
+2	people	0	_
+3	in	2	PRED
+4	a	-1	_
+5	car	3	OBJT
+
+1	?	2	ATTR
+2	people	0	_
+3	in	-1	_
+4	a	-1	_
+5	car	0	_
+
+1	a	-1	_
+2	person	0	_
+3	in	-1	_
+4	the	-1	_
+5	blue	6	ATTR
+6	house	0	_
+
+1	a	-1	_
+2	person	0	_
+3	holding	2	PRED
+4	a	-1	_
+5	green	6	ATTR
+6	ball	3	OBJT
+
+1	a	-1	_
+2	good	3	ATTR
+3	person	0	_
+
+1	What	-1	_
+2	is	-1	_
+3	the	-1	_
+4	device	0	_
+5	to	-1	_
+6	the	-1	_
+7	left	-1	_
+8	of	-1	_
+9	the	-1	_
+10	shelf	-1	_
+11	called?	-1	_
+

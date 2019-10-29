@@ -3,14 +3,14 @@ from arc_hybrid_torch import ArcHybridLSTM
 import pickle, utils, os, time, sys
 import gc
 import torch
-
+import show_output
 
 
 if __name__ == '__main__':
     parser = OptionParser()
     parser.add_option("--train", dest="conll_train", help="Annotated CONLL train file", metavar="FILE", default="../data/PTB_SD_3_3_0/train.conll")
     parser.add_option("--dev", dest="conll_dev", help="Annotated CONLL dev file", metavar="FILE", default="../data/PTB_SD_3_3_0/dev.conll")
-    parser.add_option("--test", dest="conll_test", help="Annotated CONLL test file", metavar="FILE", default="../data/PTB_SD_3_3_0/test.conll")
+    parser.add_option("--test", dest="conll_test", help="Annotated CONLL test file", metavar="FILE", default="./test.conll")
     parser.add_option("--params", dest="params", help="Parameters file", metavar="FILE", default="params.pickle")
     parser.add_option("--extrn", dest="external_embedding", help="External embeddings", metavar="FILE")
     parser.add_option("--model", dest="model", help="Load/Save model file", metavar="FILE", default="barchybrid.model")
@@ -23,7 +23,7 @@ if __name__ == '__main__':
     parser.add_option("--hidden2", type="int", dest="hidden2_units", default=0)
     parser.add_option("--k", type="int", dest="window", default=3)
     parser.add_option("--lr", type="float", dest="learning_rate", default=0.001)
-    parser.add_option("--outdir", type="string", dest="output", default="results")
+    parser.add_option("--outdir", type="string", dest="output", default='./outdir')
     parser.add_option("--activation", type="string", dest="activation", default="tanh")
     parser.add_option("--lstmlayers", type="int", dest="lstm_layers", default=2)
     parser.add_option("--lstmdims", type="int", dest="lstm_dims", default=200)
@@ -90,6 +90,26 @@ if __name__ == '__main__':
 
         parser = ArcHybridLSTM(words, rels, w2i, stored_opt)
         parser.Load(options.model)
+        
+        
+        ############
+        with open('./input_sentences.txt', 'r') as f:
+            sentences = f.readlines()
+            
+        with open('./test.conll', 'w') as f:
+            for sent in sentences:
+                sent = sent.replace('\n', '')
+                if sent == '':
+                    continue
+                    
+                if sent.startswith('#'):
+                    continue
+                words = sent.split(' ')
+                for i, word in enumerate(words):
+                    f.write('%s\t%s\t_\t_\t_\n' % (str(i+1), word))
+                f.write('\n')
+        ##############
+        
         conllu = (os.path.splitext(options.conll_test.lower())[1] == '.conllu')
         tespath = os.path.join(options.output, 'test_pred.conll' if not conllu else 'test_pred.conllu')
         ts = time.time()
@@ -102,5 +122,6 @@ if __name__ == '__main__':
         else:
             os.system('python src/utils/evaluation_script/conll17_ud_eval.py -v -w src/utils/evaluation_script/weights.clas ' + options.conll_test + ' ' + tespath + ' > ' + testpath + '.txt')
         
-        print 'Finished predicting test',te-ts
+        #print 'Finished predicting test',te-ts
+        show_output.show()
 

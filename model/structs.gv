@@ -1,0 +1,5 @@
+digraph structs {
+	rankdir=LR
+	1 [label=woman color=red fillcolor=orchid fontsize=20 penwidth=2 shape=box style=filled]
+	7 [label=counter color=red fillcolor=orchid fontsize=20 penwidth=2 shape=box style=filled]
+}
